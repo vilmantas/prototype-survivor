@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsx5ojhamajkd"]
+
+[ext_resource type="Script" path="res://features/enemy/EnemyController.cs" id="1_206m2"]
+[ext_resource type="Material" uid="uid://derrx8x3u7q61" path="res://features/enemy/simple_enemy.material" id="2_kkoag"]
+[ext_resource type="Script" path="res://features/health/HealthController.cs" id="3_2uu6l"]
+[ext_resource type="Script" path="res://features/enemy/SimpleNavigation.cs" id="4_a2eb0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_84p3c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_grt27"]
+size = Vector3(0.906074, 1, 0.945205)
+
+[node name="big_enemy" type="CharacterBody3D" groups=["enemy"]]
+transform = Transform3D(-0.367703, 0, 0.929943, 0, 1, 0, -0.929943, 0, -0.367703, -2.26453, 0, -14.9543)
+script = ExtResource("1_206m2")
+
+[node name="model" type="Node3D" parent="."]
+
+[node name="body" type="MeshInstance3D" parent="model"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.01952, 0)
+material_override = ExtResource("2_kkoag")
+mesh = SubResource("BoxMesh_84p3c")
+
+[node name="eye_2" type="MeshInstance3D" parent="model"]
+transform = Transform3D(0.70134, 0, 0, 0, 0.70134, 0, 0, 0, 0.70134, 0.0261712, 1.49624, -0.980889)
+material_override = ExtResource("2_kkoag")
+mesh = SubResource("BoxMesh_84p3c")
+
+[node name="hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.99999, 0, 0.00520108, 0, 2, 0, -0.00520108, 0, 1.99999, 0.0337887, 0.801047, -0.00720119)
+shape = SubResource("BoxShape3D_grt27")
+
+[node name="health" type="Node" parent="."]
+script = ExtResource("3_2uu6l")
+MaxHealth = 10
+CurrentHealth = 10
+
+[node name="movement" type="Node" parent="."]
+script = ExtResource("4_a2eb0")
+Speed = 2
+
+[node name="navigation" type="NavigationAgent3D" parent="."]
+height = 2.0
+
+[connection signal="OnCollision" from="movement" to="." method="_on_movement_on_collision"]
