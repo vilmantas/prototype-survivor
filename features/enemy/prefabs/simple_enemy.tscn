@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm2ci2uslqmkk"]
+[gd_scene load_steps=9 format=3 uid="uid://bm2ci2uslqmkk"]
 
 [ext_resource type="Script" path="res://features/enemy/EnemyController.cs" id="1_ndq6k"]
 [ext_resource type="Material" uid="uid://derrx8x3u7q61" path="res://features/enemy/simple_enemy.material" id="2_j4i18"]
-[ext_resource type="Script" path="res://features/health/HealthController.cs" id="3_i7jpr"]
+[ext_resource type="Script" path="res://features/Combat/Health/HealthController.cs" id="3_i7jpr"]
 [ext_resource type="Script" path="res://features/enemy/SimpleNavigation.cs" id="4_2co1a"]
+[ext_resource type="Script" path="res://features/Combat/Attack/AttackController.cs" id="5_m3kll"]
+[ext_resource type="PackedScene" uid="uid://co0312enf6vl4" path="res://features/Combat/Weapon/pref_melee_weapon.tscn" id="6_scf7y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_84p3c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_grt27"]
 size = Vector3(0.815, 1, 0.815)
 
-[node name="enemy" type="CharacterBody3D" groups=["enemy"]]
+[node name="simple_enemy" type="CharacterBody3D" node_paths=PackedStringArray("AttackController", "WeaponController") groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 script = ExtResource("1_ndq6k")
+AttackController = NodePath("attack_module")
+WeaponController = NodePath("melee_weapon")
 
 [node name="model" type="Node3D" parent="."]
 
@@ -37,7 +41,6 @@ shape = SubResource("BoxShape3D_grt27")
 
 [node name="health" type="Node" parent="."]
 script = ExtResource("3_i7jpr")
-MaxHealth = 10
 CurrentHealth = 10
 
 [node name="movement" type="Node" parent="."]
@@ -45,5 +48,14 @@ script = ExtResource("4_2co1a")
 Speed = 3
 
 [node name="navigation" type="NavigationAgent3D" parent="."]
+
+[node name="hitbox_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60151, -0.912921)
+
+[node name="attack_module" type="Node" parent="." node_paths=PackedStringArray("HitboxSpawn")]
+script = ExtResource("5_m3kll")
+HitboxSpawn = NodePath("../hitbox_spawn")
+
+[node name="melee_weapon" parent="." instance=ExtResource("6_scf7y")]
 
 [connection signal="OnCollision" from="movement" to="." method="_on_movement_on_collision"]

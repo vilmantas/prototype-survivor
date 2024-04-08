@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba6vfifut1fl8"]
+
+[ext_resource type="Script" path="res://features/Combat/Hitbox/HitboxConfiguration.cs" id="1_v5lmt"]
+
+[node name="configuration_hitbox" type="Node"]
+script = ExtResource("1_v5lmt")

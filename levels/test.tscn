@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://qd6enddvcgab"]
+[gd_scene load_steps=20 format=3 uid="uid://qd6enddvcgab"]
 
 [ext_resource type="Script" path="res://features/GameplayManager.cs" id="1_4wgev"]
 [ext_resource type="Texture2D" uid="uid://da8mhrbnvu7ja" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_ha0nm"]
@@ -6,11 +6,9 @@
 [ext_resource type="Script" path="res://features/camera/CameraFollow.cs" id="2_jqyn8"]
 [ext_resource type="Script" path="res://features/player/PlayerController.cs" id="3_hkf5m"]
 [ext_resource type="Texture2D" uid="uid://h01uhj0bmwjp" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="4_5xwkt"]
-[ext_resource type="Script" path="res://features/health/HealthController.cs" id="5_kpb2d"]
-[ext_resource type="Script" path="res://features/enemy/EnemyController.cs" id="6_22oav"]
-[ext_resource type="Material" uid="uid://derrx8x3u7q61" path="res://features/enemy/simple_enemy.material" id="6_76kof"]
-[ext_resource type="Script" path="res://features/enemy/SimpleNavigation.cs" id="7_yntfl"]
 [ext_resource type="PackedScene" uid="uid://bm2ci2uslqmkk" path="res://features/enemy/prefabs/simple_enemy.tscn" id="8_p88ts"]
+[ext_resource type="PackedScene" uid="uid://dsx5ojhamajkd" path="res://features/enemy/prefabs/big_enemy.tscn" id="9_oj6fo"]
+[ext_resource type="Script" path="res://features/Combat/Health/HealthController.cs" id="10_x3vtv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hxbo8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -46,11 +44,6 @@ albedo_texture = ExtResource("4_5xwkt")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i6wuh"]
 radius = 0.338312
-
-[sub_resource type="BoxMesh" id="BoxMesh_84p3c"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_grt27"]
-size = Vector3(0.906074, 1, 0.945205)
 
 [node name="test-level" type="Node3D"]
 
@@ -101,40 +94,9 @@ shape = SubResource("CapsuleShape3D_i6wuh")
 script = ExtResource("2_c278k")
 
 [node name="health" type="Node" parent="player"]
-script = ExtResource("5_kpb2d")
+script = ExtResource("10_x3vtv")
 
-[node name="enemy" parent="." instance=ExtResource("8_p88ts")]
+[node name="simple_enemy" parent="." instance=ExtResource("8_p88ts")]
 
-[node name="big_enemy" type="CharacterBody3D" parent="." groups=["enemy"]]
-transform = Transform3D(-0.367703, 0, 0.929943, 0, 1, 0, -0.929943, 0, -0.367703, -2.26453, 0, -14.9543)
-script = ExtResource("6_22oav")
-
-[node name="model" type="Node3D" parent="big_enemy"]
-
-[node name="body" type="MeshInstance3D" parent="big_enemy/model"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.01952, 0)
-material_override = ExtResource("6_76kof")
-mesh = SubResource("BoxMesh_84p3c")
-
-[node name="eye_2" type="MeshInstance3D" parent="big_enemy/model"]
-transform = Transform3D(0.70134, 0, 0, 0, 0.70134, 0, 0, 0, 0.70134, 0.0261712, 1.49624, -0.980889)
-material_override = ExtResource("6_76kof")
-mesh = SubResource("BoxMesh_84p3c")
-
-[node name="hitbox" type="CollisionShape3D" parent="big_enemy"]
-transform = Transform3D(1.99999, 0, 0.00520108, 0, 2, 0, -0.00520108, 0, 1.99999, 0.0337887, 0.801047, -0.00720119)
-shape = SubResource("BoxShape3D_grt27")
-
-[node name="health" type="Node" parent="big_enemy"]
-script = ExtResource("5_kpb2d")
-MaxHealth = 10
-CurrentHealth = 10
-
-[node name="movement" type="Node" parent="big_enemy"]
-script = ExtResource("7_yntfl")
-Speed = 2
-
-[node name="navigation" type="NavigationAgent3D" parent="big_enemy"]
-height = 2.0
-
-[connection signal="OnCollision" from="big_enemy/movement" to="big_enemy" method="_on_movement_on_collision"]
+[node name="big_enemy" parent="." instance=ExtResource("9_oj6fo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84102, 0, -4.60743)

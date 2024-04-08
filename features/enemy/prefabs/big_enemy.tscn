@@ -1,18 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsx5ojhamajkd"]
+[gd_scene load_steps=9 format=3 uid="uid://dsx5ojhamajkd"]
 
 [ext_resource type="Script" path="res://features/enemy/EnemyController.cs" id="1_206m2"]
 [ext_resource type="Material" uid="uid://derrx8x3u7q61" path="res://features/enemy/simple_enemy.material" id="2_kkoag"]
-[ext_resource type="Script" path="res://features/health/HealthController.cs" id="3_2uu6l"]
+[ext_resource type="Script" path="res://features/Combat/Health/HealthController.cs" id="3_2uu6l"]
 [ext_resource type="Script" path="res://features/enemy/SimpleNavigation.cs" id="4_a2eb0"]
+[ext_resource type="Script" path="res://features/Combat/Attack/AttackController.cs" id="5_fvgae"]
+[ext_resource type="PackedScene" uid="uid://co0312enf6vl4" path="res://features/Combat/Weapon/pref_melee_weapon.tscn" id="6_r1gdu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_84p3c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_grt27"]
-size = Vector3(0.906074, 1, 0.945205)
+size = Vector3(0.906074, 1.00287, 0.945205)
 
-[node name="big_enemy" type="CharacterBody3D" groups=["enemy"]]
-transform = Transform3D(-0.367703, 0, 0.929943, 0, 1, 0, -0.929943, 0, -0.367703, -2.26453, 0, -14.9543)
+[node name="big_enemy" type="CharacterBody3D" node_paths=PackedStringArray("AttackController", "WeaponController") groups=["enemy"]]
 script = ExtResource("1_206m2")
+AttackController = NodePath("attack_module")
+WeaponController = NodePath("melee_weapon")
 
 [node name="model" type="Node3D" parent="."]
 
@@ -27,12 +30,11 @@ material_override = ExtResource("2_kkoag")
 mesh = SubResource("BoxMesh_84p3c")
 
 [node name="hitbox" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.99999, 0, 0.00520108, 0, 2, 0, -0.00520108, 0, 1.99999, 0.0337887, 0.801047, -0.00720119)
+transform = Transform3D(1.99999, 0, 0.00520108, 0, 2, 0, -0.00520108, 0, 1.99999, 0.0337887, 1.15731, -0.00720119)
 shape = SubResource("BoxShape3D_grt27")
 
 [node name="health" type="Node" parent="."]
 script = ExtResource("3_2uu6l")
-MaxHealth = 10
 CurrentHealth = 10
 
 [node name="movement" type="Node" parent="."]
@@ -41,5 +43,14 @@ Speed = 2
 
 [node name="navigation" type="NavigationAgent3D" parent="."]
 height = 2.0
+
+[node name="hitbox_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28201, -1.87263)
+
+[node name="attack_module" type="Node" parent="." node_paths=PackedStringArray("HitboxSpawn")]
+script = ExtResource("5_fvgae")
+HitboxSpawn = NodePath("../hitbox_spawn")
+
+[node name="melee_weapon" parent="." instance=ExtResource("6_r1gdu")]
 
 [connection signal="OnCollision" from="movement" to="." method="_on_movement_on_collision"]

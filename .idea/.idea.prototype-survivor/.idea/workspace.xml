@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f17093-77fa-469e-b59c-934919589a2f" name="Changes" comment="" />
+    <list default="true" id="00f17093-77fa-469e-b59c-934919589a2f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.prototype-survivor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prototype-survivor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/features/enemy/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/enemy/prefabs/big_enemy.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/features/enemy/prefabs/big_enemy.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/enemy/prefabs/simple_enemy.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/features/enemy/prefabs/simple_enemy.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/health/HealthController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/test.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/levels/test.tscn" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +19,9 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="autoShow" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLabMergeRequestsSettings"><![CDATA[{}]]></component>
   <component name="GithubPullRequestsUISettings">{}</component>
@@ -29,12 +39,13 @@
   "keyToString": {
     ".NET Executable.Player.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -86,7 +97,7 @@
       <workItem from="1711967705069" duration="4000" />
       <workItem from="1711967749548" duration="4961000" />
       <workItem from="1711972796457" duration="175000" />
-      <workItem from="1711973025812" duration="17580000" />
+      <workItem from="1711973025812" duration="23494000" />
     </task>
     <servers />
   </component>
@@ -102,13 +113,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/features/enemy/EnemyController.cs</url>
-          <line>10</line>
+          <line>15</line>
           <properties documentPath="C:\Users\Vilmantas\Desktop\Code\Godot\prototype-survivor\features\enemy\EnemyController.cs" containingFunctionPresentation="Method '_on_movement_on_collision'">
             <startOffsets>
-              <option value="238" />
+              <option value="351" />
             </startOffsets>
             <endOffsets>
-              <option value="277" />
+              <option value="390" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />

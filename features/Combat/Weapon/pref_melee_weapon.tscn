@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://co0312enf6vl4"]
+
+[ext_resource type="Script" path="res://features/Combat/Weapon/WeaponController.cs" id="1_uhw8s"]
+[ext_resource type="PackedScene" uid="uid://ba6vfifut1fl8" path="res://Features/Combat/Hitbox/configuration_hitbox.tscn" id="2_vi580"]
+[ext_resource type="PackedScene" uid="uid://p0kvyasajslm" path="res://Features/Combat/Hitbox/hitbox_damage.tscn" id="3_py5j2"]
+[ext_resource type="PackedScene" uid="uid://4w3d40eeetny" path="res://features/Combat/Weapon/configuration_weapon.tscn" id="3_s0h76"]
+[ext_resource type="Script" path="res://features/Combat/Weapon/MeleeWeaponConfiguration.cs" id="4_8dx4s"]
+
+[node name="melee_weapon" type="Node3D" node_paths=PackedStringArray("WeaponConfiguration", "MeleeWeaponConfiguration")]
+script = ExtResource("1_uhw8s")
+WeaponConfiguration = NodePath("configuration_base")
+MeleeWeaponConfiguration = NodePath("configuration_melee")
+
+[node name="configuration_hitbox" parent="." instance=ExtResource("2_vi580")]
+HitboxModel = ExtResource("3_py5j2")
+Delay = 1.0
+Duration = 1.0
+
+[node name="configuration_base" parent="." instance=ExtResource("3_s0h76")]
+Name = "Slicer"
+DamageMin = 1
+DamageMax = 5
+
+[node name="configuration_melee" parent="." node_paths=PackedStringArray("HitboxConfiguration") instance=ExtResource("3_s0h76")]
+script = ExtResource("4_8dx4s")
+HitboxConfiguration = NodePath("../configuration_hitbox")
